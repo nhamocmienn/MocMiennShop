@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi Tiết Sản Phẩm</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="productDetail.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="navbar">
+  <div class="logo" onclick="location.href='index.html'">Nhà Mộc Miên</div>
+
+  <nav>
+    <ul class="nav-links">
+    </ul>
+  </nav>
+
+  <div class="icons">
+    <a href="https://www.facebook.com/nhamocmienn" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+  </div>
+</header>
+
+
+  <div class="product-detail">
+    <div class="left-column">
+      <img id="mainImage" class="main-image" src="">
+      <div id="subImages" class="sub-image-row"></div>
+    </div>
+
+    <div class="right-column">
+      <h2 id="productTitle">Tên sản phẩm</h2>
+      <div class="price-range" id="mainPrice">260,000đ - 289,000đ</div>
+      <p class="note">Phân loại: <span id="productType"></span></p>
+
+      <div class="size-section">
+        <label>Size:</label>
+        <div class="size-options" id="sizeOptions"></div>
+      </div>
+
+      <div class="quantity-section">
+        <label>Số lượng:</label>
+        <button onclick="adjustQuantity(-1)">-</button>
+        <span id="quantity">1</span>
+        <button onclick="adjustQuantity(1)">+</button>
+      </div>
+
+      <p class="freeship">Freeship khu vực Hòa Lạc, nội thành Hà Nội</p>
+
+      <div class="buttons">
+        <button class="add-to-cart">🛒 THÊM VÀO GIỎ</button>
+        <button class="buy-now">MUA NGAY</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-description">
+  <h3>Mô tả sản phẩm</h3>
+  <div class="desc-block">
+    <p>💖 Ai rồi cũng phải bị "say nắng" một lần trong đời. Nàng bỗng cười, tim ta khẽ lạc nhịp, Tương tư thì dần lớn, còn lời yêu ngại ngùng mãi chưa dám cất lên! Nhưng các cao thủ tình yêu đã dặn: “Hành động luôn lãng mạn hơn lời nói”.</p>
+
+    <p>Vậy nên Nhà Mộc Miên mách cho ae set quà tặng này tên là “Dịu” – tựa như lời thì thầm tinh tế nói thay tấm chân tình, giúp ae ghi điểm tuyệt đối trong mắt crush nhá.</p>
+
+    <p>💝 Set bao gồm:<br>
+    • 1 bộ lụa mềm mại, dịu dàng với cả làn da nhạy cảm, ai mặc cũng phải mê<br>
+    • 1 thiệp viết tay đong đầy cảm xúc<br>
+    • 1 lược gỗ trầm hương massage thư giãn giúp crush giải tỏa căng thẳng<br>
+    Tất cả được đóng gói tỉ mỉ trong hộp quà xinh yêu.</p>
+
+    <p>💌 Đừng để đối thủ nhanh chân tỏ tình trước – đặt hàng ngay kẻo ế dài dài là không có kêu nha!</p>
+
+    <hr>
+    <p><strong>Mọi thắc mắc xin liên hệ:</strong><br>
+    Facebook: Nhà Mộc Miên<br>
+    Instagram: @nhamocmien<br>
+    Hotline: 0345324233</p>
+  </div>
+</div>
+
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCR6ChodbxTFeMqVEfc37LGMZn0sRKyl-k",
+      authDomain: "loichucyeuthuong18.firebaseapp.com",
+      projectId: "loichucyeuthuong18",
+      storageBucket: "loichucyeuthuong18.appspot.com",
+      messagingSenderId: "434140825017",
+      appId: "1:434140825017:web:13deda5e05e22fe2f76268"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    const db = firebase.database();
+
+    db.ref(`products/${productId}`).once("value").then(snapshot => {
+      const product = snapshot.val();
+      if (!product) return;
+
+      document.getElementById("productTitle").textContent = product.name;
+      document.getElementById("mainPrice").textContent = parseInt(product.price).toLocaleString() + 'đ';
+      document.getElementById("productType").textContent = product.type;
+      //document.getElementById("productDesc").textContent = product.detailDesc || product.desc || "Chưa có mô tả.";
+
+      const images = product.images || [];
+      document.getElementById("mainImage").src = images[0] || 'https://via.placeholder.com/250x200?text=No+Image';
+
+      document.getElementById("subImages").innerHTML = images.map(img => `
+        <img src="${img}" onclick="document.getElementById('mainImage').src='${img}'">
+      `).join("");
+
+      const sizeContainer = document.getElementById("sizeOptions");
+      const sizes = ["S", "M", "L", "XL"];
+      sizes.forEach(size => {
+        const qty = product.quantity?.[size] ?? 0;
+        const btn = document.createElement("button");
+        btn.textContent = size;
+        btn.disabled = qty <= 0;
+        if (qty <= 0) btn.classList.add("disabled");
+        sizeContainer.appendChild(btn);
+      });
+    });
+
+    function adjustQuantity(delta) {
+      const span = document.getElementById("quantity");
+      let qty = parseInt(span.textContent);
+      qty = Math.max(1, qty + delta);
+      span.textContent = qty;
+    }
+  </script>
+</body>
+</html>

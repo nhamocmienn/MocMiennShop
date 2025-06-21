@@ -33,3 +33,11 @@ const container = document.getElementById('productList');
   const maxScrollLeft = container.scrollWidth - container.clientWidth;
   container.scrollLeft = Math.min(maxScrollLeft, container.scrollLeft + 240);
 }
+
+function scrollFeedbackLeft() {
+  document.getElementById("feedbackList").scrollBy({ left: -300, behavior: "smooth" });
+}
+function scrollFeedbackRight() {
+  document.getElementById("feedbackList").scrollBy({ left: 300, behavior: "smooth" });
+}
+

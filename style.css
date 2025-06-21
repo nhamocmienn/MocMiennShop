@@ -328,3 +328,356 @@ body {
 .right {
   margin-left: 10px;
 }
+/*--------------------Section THU AN DANH --------------------------*/
+.guithuthandan {
+  background: #fff8f1;
+  padding: 100px 20px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.message-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.intro-image-placeholder {
+  width: 400px;
+  height: 180px;
+  border-radius: 15px;
+  background-image: url('https://via.placeholder.com/150x130.png?text=Ảnh+Nhỏ');
+  background-size: cover;
+  background-position: center;
+  border: 2px dotted #8cc;
+  margin: 0 auto 20px;
+}
+
+
+.message-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.message-title {
+  font-family: 'Pacifico', cursive;
+  color: #d85c7c;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.message-img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.message-left p {
+  color: #5e2c3e;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.message-right {
+  background: white;
+  border-radius: 12px;
+  padding: 30px 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  flex: 1;
+  min-width: 300px;
+}
+
+.message-right label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+  color: #7a1f39;
+}
+
+.message-right input[type="text"],
+.message-right textarea,
+.message-right input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+}
+
+.message-right textarea {
+  resize: vertical;
+}
+
+#sendBtn {
+  margin-top: 20px;
+  background: #f598b5;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#sendBtn:hover {
+  background: #d35d87;
+}
+
+#fileList .file-item {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #333;
+}
+
+#progressContainer {
+  display: none;
+  margin-top: 15px;
+}
+
+#progressBar {
+  width: 100%;
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 8px;
+}
+/*--------------------Section Feedback--------------------------*/
+.feedback-section {
+  background: #fff8f1;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.feedback-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  gap: 10px;
+}
+
+.feedback-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 30px;
+  padding: 20px 0;
+  scrollbar-width: none;
+}
+.feedback-container::-webkit-scrollbar {
+  display: none;
+}
+
+.feedback-card {
+  flex: 0 0 auto;
+  width: 260px;
+  background: white;
+  border: 1px solid #f3c;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  text-align: left;
+  position: relative;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.feedback-card .stars {
+  color: #f3a500;
+  font-size: 18px;
+  margin-bottom: 10px;
+  justify-self: center;
+}
+
+.feedback-img {
+  width: 150px;
+  height: 180px;
+  border-radius: 15px;
+  background-image: url('https://via.placeholder.com/150x130.png?text=Ảnh+Nhỏ');
+  background-size: cover;
+  background-position: center;
+  border: 2px dotted #8cc;
+  margin: 0 auto 15px;
+}
+
+.feedback-text {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.feedback-name {
+  font-weight: bold;
+  color: #7a1f39;
+  font-size: 15px;
+}
+
+/* Nút trái/phải */
+.feedback-nav {
+  background: white;
+  border: none;
+  font-size: 18px;
+  color: #d2496c;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.2s ease;
+}
+.feedback-nav:hover {
+  background: #fcd3df;
+}
+
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .section {
+    padding: 50px 15px; /* giảm từ 100px xuống 50px */
+  }
+
+  .gioi-thieu {
+    padding: 40px 15px;
+  }
+
+  .set-qua {
+    padding: 40px 15px 40px;
+  }
+
+  .guithuthandan {
+    padding: 40px 15px;
+  }
+
+  .feedback-section {
+    padding: 40px 15px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+
+  .message-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .message-right,
+  .message-left {
+    padding: 15px;
+  }
+
+  .feedback-card {
+    padding: 15px;
+  }
+
+
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 20px;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .navbar ul li {
+    margin: 5px 0;
+  }
+
+  .slider-wrapper {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .nav-btn.left,
+  .nav-btn.right {
+    display: none;
+  }
+
+  .product-card {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .gioi-thieu-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .gioi-thieu-images {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .img-vertical,
+  .img-stack,
+  .img-small {
+    width: 100% !important;
+    height: auto;
+  }
+
+  .message-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .intro-image-placeholder {
+    width: 100%;
+    height: 160px;
+  }
+
+  .message-left,
+  .message-right {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .feedback-wrapper {
+    flex-direction: column;
+  }
+
+  .feedback-card {
+    width: 90%;
+    margin: auto;
+  }
+
+  .feedback-img {
+    width: 100%;
+    height: 160px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .slogan {
+    font-size: 22px;
+  }
+
+  .title,
+  .desc {
+    font-size: 14px;
+  }
+
+  .buy-btn {
+    width: 100%;
+    font-size: 14px;
+  }
+}

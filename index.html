@@ -24,7 +24,7 @@
   </nav>
 
   <div class="icons">
-    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.facebook.com/nhamocmienn" target="_blank"><i class="fab fa-facebook"></i></a>
     <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
     <a href="#cart"><i class="fas fa-shopping-cart"></i></a>
   </div>
@@ -48,10 +48,9 @@
       <h2 class="slogan">“Điều thương chưa dám nói”</h2>
       <p class="title"><strong>Nhà Mộc Miên - Trang phục không chỉ để mặc</strong></p>
       <p class="desc">
-        Bằng một tình yêu và sự tôn kính đặc biệt dành cho những người phụ nữ Việt Nam, Nhà Mộc Miên mang đến những món quà mềm mại không chỉ mang lại sự thoải mái, dịu dàng cho người mặc, mà còn khẽ gửi gắm những tình cảm yêu thương và trân trọng đầu đã khắc sâu trong tim người gửi nhưng ngại chưa dám nói thành lời.
+        Bằng một tình yêu và sự tôn kính đặc biệt dành cho những người phụ nữ Việt Nam, Nhà Mộc Miên mang đến những món quà mềm mại không chỉ mang lại sự thoải mái, dịu dàng cho người mặc, mà còn khẽ gửi gắm những tình cảm yêu thương và trân trọng dẫu đã khắc sâu trong tim người gửi nhưng ngại chưa dám nói thành lời.
       </p>
       <a href="#setqua" class="xem-them">XEM THÊM</a>
-      <p class="hint">nếu ấn xem thêm hoặc kéo xuống sẽ chuyển hướng đến trang set quà nhé</p>
     </div>
   </div>
 </section>
@@ -70,23 +69,98 @@
 
     <button class="nav-btn right" onclick="scrollToRight()"><i class="fas fa-chevron-right"></i></button>
   </div>
+  </section>
+
+
+
+  <section id="guithuthandan" class="section guithuthandan">
+  <div class="message-container">
+    <div class="message-left">
+      <h2 class="message-title">Hộp thư yêu thương</h2>
+      <div class="intro-image-placeholder"></div>
+      <p>Không phải ai trong chúng ta cũng đủ tự tin để nói lên tâm chân tình hay những lời yêu thương tới những người mà ta trân trọng. Chúng chỉ vì ngại, vì sợ mất đi điều quý giá, hay đơn giản là chưa tìm được cách nói ra… nên chúng ta đành giấu trong tim, để rồi tiếc nuối.</p>
+      <p>Đừng để những thương yêu ấy lại một lần nữa lỡ nhịp. Chúng mình ở đây, là "hộp thư yêu thương" sẵn sàng giúp bạn gửi gắm những lời chưa kịp nói, đến đúng người - và hoàn toàn ẩn danh nếu bạn muốn.</p>
+      <p>Chúng mình đảm bảo giữ kín mọi thông tin của bạn và chỉ chia sẻ khi có sự cho phép từ bạn.</p>
+    </div>
+
+    <div class="message-right">
+      <form id="messageForm">
+        <label for="senderName">Người gửi:</label>
+        <input type="text" id="senderName" placeholder="Tên bạn (hoặc để trống nếu ẩn danh)">
+
+        <label><input type="checkbox" id="anonymous"> Gửi ẩn danh</label>
+
+        <label for="receiverName">Người nhận:</label>
+        <input type="text" id="receiverName" required placeholder="Tên người nhận">
+
+        <label for="receiverContact">Liên hệ (SĐT, Facebook, Zalo...):</label>
+        <input type="text" id="receiverContact" required placeholder="VD: facebook.com/nguoinhan">
+
+        <label for="messageText">Lời nhắn:</label>
+        <textarea id="messageText" required placeholder="Viết lời nhắn của bạn tại đây..."></textarea>
+
+        <label for="storyText">Câu chuyện bạn muốn chia sẻ cho chúng tôi:</label>
+        <textarea id="storyText" rows="4" placeholder="(Không bắt buộc) Chia sẻ thêm về hoàn cảnh, ý nghĩa lời nhắn..."></textarea>
+
+        <label for="mediaFile">File âm thanh / video / hình ảnh:</label>
+        <input type="file" id="mediaFile" accept="audio/*,video/*,image/*" multiple>
+        <div id="fileList"></div>
+
+        <button type="submit" id="sendBtn">🎁 Gửi lời nhắn </button>
+
+        <div id="progressContainer">
+          <div id="progressText">🎁 Đang gửi lời nhắn ...</div>
+          <progress id="progressBar" value="0" max="100"></progress>
+        </div>
+        <p class="error" id="errorMsg"></p>
+      </form>
+    </div>
+  </div>
+  </section>
+
+
+  <section id="feedback" class="section feedback-section">
+  <h2 class="section-title">Feedback & Đánh giá</h2>
+  <div class="feedback-wrapper">
+    <button class="feedback-nav left" onclick="scrollFeedbackLeft()"><i class="fas fa-chevron-left"></i></button>
+
+    <div class="feedback-container" id="feedbackList">
+      <div class="feedback-card">
+        <div class="stars">★★★★★</div>
+        <div class="feedback-img"></div>
+        <p class="feedback-text">Mua tặng mẹ và rất ưng. Bộ quần áo mặc mát, thoải mái...</p>
+        <div class="feedback-name">Sinh Thái</div>
+      </div>
+
+      <div class="feedback-card">
+        <div class="stars">★★★★★</div>
+        <div class="feedback-img"></div>
+        <p class="feedback-text">Cảm ơn shop đã giúp mình gửi quà cho người yêu ở xa...</p>
+        <div class="feedback-name">Hoàng Thành</div>
+      </div>
+
+      <div class="feedback-card">
+        <div class="stars">★★★★★</div>
+        <div class="feedback-img"></div>
+        <p class="feedback-text">Set quà rất ý nghĩa để tự thưởng cho bản thân...</p>
+        <div class="feedback-name">Thanh Trà</div>
+      </div>
+    </div>
+
+    <button class="feedback-nav right" onclick="scrollFeedbackRight()"><i class="fas fa-chevron-right"></i></button>
+  </div>
 </section>
 
 
-
-  <section id="guithuthandan" class="section">
-    <h2>Gửi Thư Ẩn Danh</h2>
-    <p>Một form gửi thư ẩn danh.</p>
-  </section>
-
-  <section id="feedback" class="section">
-    <h2>Feedback</h2>
-    <p>Phản hồi của khách hàng.</p>
-  </section>
-
+  <script>
+    document.querySelector(".logo").addEventListener("click", function() {
+    window.location.href = "index.html";
+    });
+  </script>
   <script src="script.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  
   <script>
     //lay product tu firebase
   const firebaseConfig = {
@@ -110,17 +184,154 @@
       const div = document.createElement("div");
       div.className = "product-card";
       div.innerHTML = `
-        <img src="${imgUrl}" alt="${product.name}">
-        <div class="product-header">
-        <div class="product-name">${product.name}</div>
-        <div class="product-price">${parseInt(product.price).toLocaleString()}đ</div>
-        </div>
-        <div class="product-desc">${product.desc}</div>
-        <button class="buy-btn" onclick="alert('Chuyển sang trang chi tiết sản phẩm sau')">MUA NGAY</button>
+      <a href="product-detail.html?id=${child.key}">
+      <img src="${imgUrl}" alt="${product.name}">
+      </a>
+      <div class="product-header">
+      <a class="product-name" href="product-detail.html?id=${child.key}">${product.name}</a>
+      <div class="product-price">${parseInt(product.price).toLocaleString()}đ</div>
+      </div>
+      <div class="product-desc">${product.desc}</div>
+      <button class="buy-btn" onclick="window.location.href='product-detail.html?id=${child.key}'">MUA NGAY</button>
       `;
+
       productList.appendChild(div);
     });
   });
-</script>
+  </script>
+
+   <script>
+    const form = document.getElementById("messageForm");
+    const sendBtn = document.getElementById("sendBtn");
+    const progressBar = document.getElementById("progressBar");
+    const errorMsg = document.getElementById("errorMsg");
+    const fileInput = document.getElementById("mediaFile");
+    const fileListDiv = document.getElementById("fileList");
+    const successModal = document.getElementById("successModal");
+
+    let selectedFiles = [];
+
+    fileInput.addEventListener("change", () => {
+      const newFiles = Array.from(fileInput.files);
+      selectedFiles = selectedFiles.concat(newFiles);
+
+      const seen = new Set();
+      selectedFiles = selectedFiles.filter(file => {
+        const key = file.name + file.size;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+
+      const dt = new DataTransfer();
+      selectedFiles.forEach(f => dt.items.add(f));
+      fileInput.files = dt.files;
+
+      updateFileList();
+    });
+
+    function updateFileList() {
+      fileListDiv.innerHTML = "";
+      selectedFiles.forEach((file, index) => {
+        const item = document.createElement("div");
+        item.className = "file-item";
+        item.innerHTML = `
+          <span>${file.name}</span>
+          <button onclick="removeFile(${index})">✖</button>
+        `;
+        fileListDiv.appendChild(item);
+      });
+    }
+
+    function removeFile(index) {
+      selectedFiles.splice(index, 1);
+      const dt = new DataTransfer();
+      selectedFiles.forEach(f => dt.items.add(f));
+      fileInput.files = dt.files;
+      updateFileList();
+    }
+
+    function closeModal() {
+      successModal.style.display = "none";
+    }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    sendBtn.disabled = true;
+    document.getElementById("progressContainer").style.display = "block";
+    progressBar.value = 10;
+    errorMsg.textContent = "";
+
+    const sender = document.getElementById("anonymous").checked ? "Ẩn danh" : document.getElementById("senderName").value.trim();
+    const receiver = document.getElementById("receiverName").value.trim();
+    const contact = document.getElementById("receiverContact").value.trim();
+    const message = document.getElementById("messageText").value.trim();
+    const story = document.getElementById("storyText").value.trim();
+
+    // ✅ Thay đổi nội dung progressText
+    const progressText = document.getElementById("progressText");
+    progressText.textContent = `🎁 Chúng tôi sẽ gửi giúp bạn tin nhắn đến "${receiver}" sớm nhất`;
+
+    if (!receiver || !message || !contact) {
+      errorMsg.textContent = "Vui lòng điền đầy đủ thông tin bắt buộc.";
+      sendBtn.disabled = false;
+      document.getElementById("progressContainer").style.display = "none";
+      return;
+    }
+
+    try {
+      const uploadedUrls = [];
+      let uploadedCount = 0;
+
+      for (const file of selectedFiles) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "demo_unsigned");
+
+        const res = await fetch("https://api.cloudinary.com/v1_1/dddplwb0o/auto/upload", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await res.json();
+        if (!data.secure_url) throw new Error("Tải file lên thất bại.");
+        uploadedUrls.push(data.secure_url);
+
+        uploadedCount++;
+        progressBar.value = 10 + Math.floor((uploadedCount / selectedFiles.length) * 80);
+      }
+
+      const newMsgRef = db.ref("messages").push();
+      await newMsgRef.set({
+        sender,
+        receiver,
+        contact,
+        message,
+        story,
+        files: uploadedUrls,
+        timestamp: new Date().toISOString()
+      });
+
+      progressBar.value = 100;
+      form.reset();
+      fileListDiv.innerHTML = "";
+      selectedFiles = [];
+
+      // ✅ Không dùng modal nữa — chỉ hiển thị text
+      progressText.textContent = `🎉 Gửi thành công! Chúng tôi sẽ liên hệ với "${receiver}" trong 24h.`;
+    } catch (error) {
+      console.error(error);
+      errorMsg.textContent = "Đã có lỗi xảy ra. Vui lòng thử lại.";
+    }
+
+    sendBtn.disabled = false;
+    setTimeout(() => {
+      document.getElementById("progressContainer").style.display = "none";
+    }, 4000);
+  });
+  </script>
+
+
 </body>
 </html>
