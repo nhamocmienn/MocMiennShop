@@ -545,23 +545,28 @@ body {
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 768px) {
   .section {
-    padding: 50px 15px; /* giảm từ 100px xuống 50px */
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 15px;
   }
 
   .gioi-thieu {
-    padding: 40px 15px;
+    padding: 20px 15px;
   }
 
   .set-qua {
-    padding: 40px 15px 40px;
+    padding: 20px 15px;
   }
 
   .guithuthandan {
-    padding: 40px 15px;
+    padding: 20px 15px;
   }
 
   .feedback-section {
-    padding: 40px 15px;
+    padding: 20px 15px;
   }
 
   .section-title {
@@ -583,7 +588,6 @@ body {
     padding: 15px;
   }
 
-
   .navbar {
     flex-direction: column;
     height: auto;
@@ -602,6 +606,7 @@ body {
   .slider-wrapper {
     flex-direction: column;
     padding: 0;
+    align-items: center;
   }
 
   .nav-btn.left,
@@ -618,6 +623,8 @@ body {
   .gioi-thieu-container {
     flex-direction: column;
     padding: 20px;
+    align-items: center;
+    justify-content: center;
   }
 
   .gioi-thieu-images {
@@ -635,6 +642,7 @@ body {
   .message-container {
     flex-direction: column;
     padding: 20px;
+    align-items: center;
   }
 
   .intro-image-placeholder {
@@ -650,6 +658,7 @@ body {
 
   .feedback-wrapper {
     flex-direction: column;
+    align-items: center;
   }
 
   .feedback-card {
