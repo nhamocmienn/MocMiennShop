@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  background-image: url('menu-bg.png'); /* đổi lại theo tên ảnh bạn đặt */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+/* Logo bên trái */
+.navbar .logo {
+  font-family: 'Pacifico', cursive;
+  font-size: 24px;
+  color: #c60e45;
+}
+
+.logo {
+  font-family: 'Pacifico', cursive;
+}
+
+.navbar .nav-links li a {
+  text-decoration: none;
+  color: #c60e45;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.navbar .nav-links li a:hover {
+  text-decoration: underline;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  margin: 0;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #c60e45;
+  font-weight: bold;
+}
+
+.navbar .icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .navbar .icons a {
+      color: #c60e45;
+      font-size: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .navbar .icons a:hover {
+      transform: scale(1.2);
+    }
+
+.section {
+  padding: 100px 20px;
+  margin-top: 60px;
+  min-height: 100vh;
+  background: #fff8f9;
+  border-bottom: 1px solid #eee;
+}
