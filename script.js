@@ -19,3 +19,17 @@ window.onscroll = () => {
     }
   });
 };
+
+// set qua 
+const container = document.getElementById('productList');
+
+ function scrollToLeft() {
+  const maxScrollLeft = container.scrollWidth - container.clientWidth;
+  container.scrollLeft = Math.max(0, container.scrollLeft - 260);
+  console.log("ScrollLeft:", container.scrollLeft, "ScrollWidth:", container.scrollWidth, "ClientWidth:", container.clientWidth);
+}
+
+ function scrollToRight() {
+  const maxScrollLeft = container.scrollWidth - container.clientWidth;
+  container.scrollLeft = Math.min(maxScrollLeft, container.scrollLeft + 240);
+}

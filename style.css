@@ -82,8 +82,249 @@ body {
 
 .section {
   padding: 100px 20px;
-  margin-top: 60px;
-  min-height: 100vh;
+  min-height: 70vh;
   background: #fff8f9;
   border-bottom: 1px solid #eee;
+}
+
+
+/*--------------------Section gioi thieu --------------------------*/
+.gioi-thieu {
+  background: #fff8f1;
+}
+
+.gioi-thieu-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+.gioi-thieu-images {
+  display: flex;
+  gap: 20px;
+}
+
+.title {
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* VÙNG ẢNH DỌC */
+.img-vertical {
+  width: 250px;
+  height: 380px;
+  border-radius: 20px;
+  background-image: url('https://via.placeholder.com/180x300.png?text=Ảnh+Dọc');
+  background-size: cover;
+  background-position: center;
+  border: 3px dashed #f9a;
+}
+
+/* STACK 2 ẢNH NHỎ DỌC */
+.img-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.img-small {
+  width: 150px;
+  height: 180px;
+  border-radius: 15px;
+  background-image: url('https://via.placeholder.com/150x130.png?text=Ảnh+Nhỏ');
+  background-size: cover;
+  background-position: center;
+  border: 2px dotted #8cc;
+}
+
+.gioi-thieu-content {
+  max-width: 500px;
+  color: #7a3241;
+}
+
+.slogan {
+  font-size: 28px;
+  font-family: 'Pacifico', cursive;
+  color: #f05c8c;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.desc {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.xem-them {
+  display: inline-block;
+  padding: 10px 25px;
+  border: 2px solid #f05c8c;
+  color: #f05c8c;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.xem-them:hover {
+  background-color: #f05c8c;
+  color: white;
+}
+
+.hint {
+  font-size: 13px;
+  color: #c89;
+  margin-top: 10px;
+}
+
+/*--------------------Section set qua --------------------------*/
+.set-qua {
+  background: #fff8f1;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.section-title {
+  text-align: center;
+  color: #7a1f39;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.slider-wrapper {
+  position: relative;
+  max-width: 1120px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+.scroll-container {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* CARD ĐẸP MẮT */
+.product-card {
+  flex: 0 0 auto;
+  width: 250px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px 16px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: transform 0.25s ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* Khung chứa tên và giá cùng 1 dòng */
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #fcb6c5;
+  padding-bottom: 6px;
+  margin-top: 12px;
+}
+
+/* Tên sản phẩm */
+.product-name {
+  font-weight: 700;
+  font-size: 16px;
+  color: #7a1f39;
+  margin: 0;
+}
+
+/* Giá */
+.product-price {
+  font-size: 15px;
+  font-weight: 500;
+  color: #5e2c3e;
+  margin: 0;
+}
+
+
+/* Mô tả */
+.product-desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+  min-height: 40px;
+  margin-bottom: 1px;
+  margin-top: 2px;
+  padding: 0 6px;
+}
+
+/* Nút mua */
+.buy-btn {
+  border: 2px solid #f7b2c5;
+  background-color: transparent;
+  color: #d2496c;
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 6px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.buy-btn:hover {
+  background-color: #f598b5;
+  color: white;
+  border-color: #f598b5;
+}
+
+/* Nút điều hướng trái/phải */
+.nav-btn {
+  background: white;
+  border: none;
+  font-size: 20px;
+  color: #d35d87;
+  padding: 10px 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  border-radius: 50%;
+  z-index: 1;
+  transition: background-color 0.2s ease;
+}
+.nav-btn:hover {
+  background: #fcd3df;
+}
+.left {
+  margin-right: 10px;
+}
+.right {
+  margin-left: 10px;
 }

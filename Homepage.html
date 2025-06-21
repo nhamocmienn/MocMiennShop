@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="style.css">
   <!-- Thư viện icon -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -31,15 +32,47 @@
 
 
   <!-- Các section nội dung -->
-  <section id="gioithieu" class="section">
-    <h2>Giới Thiệu</h2>
-    <p>Phần giới thiệu sản phẩm hoặc thương hiệu.</p>
-  </section>
+  <section id="gioithieu" class="section gioi-thieu">
+  <div class="gioi-thieu-container">
+    <!-- Cột ảnh trái -->
+    <div class="gioi-thieu-images">
+      <div class="img-vertical"></div>
+      <div class="img-stack">
+        <div class="img-small"></div>
+        <div class="img-small"></div>
+      </div>
+    </div>
 
-  <section id="setqua" class="section">
-    <h2>Set Quà</h2>
-    <p>Danh sách set quà.</p>
-  </section>
+    <!-- Nội dung bên phải -->
+    <div class="gioi-thieu-content">
+      <h2 class="slogan">“Điều thương chưa dám nói”</h2>
+      <p class="title"><strong>Nhà Mộc Miên - Trang phục không chỉ để mặc</strong></p>
+      <p class="desc">
+        Bằng một tình yêu và sự tôn kính đặc biệt dành cho những người phụ nữ Việt Nam, Nhà Mộc Miên mang đến những món quà mềm mại không chỉ mang lại sự thoải mái, dịu dàng cho người mặc, mà còn khẽ gửi gắm những tình cảm yêu thương và trân trọng đầu đã khắc sâu trong tim người gửi nhưng ngại chưa dám nói thành lời.
+      </p>
+      <a href="#setqua" class="xem-them">XEM THÊM</a>
+      <p class="hint">nếu ấn xem thêm hoặc kéo xuống sẽ chuyển hướng đến trang set quà nhé</p>
+    </div>
+  </div>
+</section>
+
+
+
+  <section id="setqua" class="section set-qua">
+  <h2 class="section-title">Set bán chạy nhất</h2>
+
+  <div class="slider-wrapper">
+    <button class="nav-btn left" onclick="scrollToLeft()"><i class="fas fa-chevron-left"></i></button>
+
+    <div class="scroll-container" id="productList">
+      <!-- Sản phẩm sẽ được đổ từ Firebase -->
+    </div>
+
+    <button class="nav-btn right" onclick="scrollToRight()"><i class="fas fa-chevron-right"></i></button>
+  </div>
+</section>
+
+
 
   <section id="guithuthandan" class="section">
     <h2>Gửi Thư Ẩn Danh</h2>
@@ -52,5 +85,42 @@
   </section>
 
   <script src="script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script>
+    //lay product tu firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyCR6ChodbxTFeMqVEfc37LGMZn0sRKyl-k",
+    authDomain: "loichucyeuthuong18.firebaseapp.com",
+    projectId: "loichucyeuthuong18",
+    storageBucket: "loichucyeuthuong18.appspot.com",
+    messagingSenderId: "434140825017",
+    appId: "1:434140825017:web:13deda5e05e22fe2f76268"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  const productList = document.getElementById("productList");
+
+  db.ref("products").once("value").then(snapshot => {
+    snapshot.forEach(child => {
+      const product = child.val();
+      const imgUrl = product.images?.[0] || "https://via.placeholder.com/200x150?text=No+Image";
+
+      const div = document.createElement("div");
+      div.className = "product-card";
+      div.innerHTML = `
+        <img src="${imgUrl}" alt="${product.name}">
+        <div class="product-header">
+        <div class="product-name">${product.name}</div>
+        <div class="product-price">${parseInt(product.price).toLocaleString()}đ</div>
+        </div>
+        <div class="product-desc">${product.desc}</div>
+        <button class="buy-btn" onclick="alert('Chuyển sang trang chi tiết sản phẩm sau')">MUA NGAY</button>
+      `;
+      productList.appendChild(div);
+    });
+  });
+</script>
 </body>
 </html>
