@@ -219,3 +219,131 @@ body {
   border-top: 1px dashed #ccc;
 }
 /*---------------------------nHÁP------------------------------*/
+
+@media (max-width: 768px) {
+  /* Navbar */
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 20px;
+    gap: 10px;
+  }
+
+  .navbar .icons {
+    justify-content: center;
+  }
+
+  /* Product Detail Layout */
+  .product-detail {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 24px;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+    text-align: center;
+  }
+
+  .main-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .sub-image-row {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .sub-image-row img {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Product Info */
+  .right-column h2 {
+    font-size: 22px;
+  }
+
+  .price-range {
+    font-size: 18px;
+  }
+
+  .note,
+  .freeship {
+    font-size: 14px;
+  }
+
+  /* Size & Quantity */
+  .size-section,
+  .quantity-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .size-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .size-options button {
+    padding: 6px 14px;
+    font-size: 14px;
+  }
+
+  .quantity-section {
+    flex-direction: row;
+  }
+
+  .quantity-section button {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  #quantity {
+    font-size: 16px;
+    min-width: 32px;
+    display: inline-block;
+    text-align: center;
+  }
+
+  /* Buttons */
+  .buttons {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    align-items: center;
+  }
+
+  .buttons button {
+    width: 90%;
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  /* Description */
+  .product-description {
+    padding: 20px;
+  }
+
+  .product-description h3 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .product-description .desc-block p {
+    font-size: 14px;
+  }
+}
