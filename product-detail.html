@@ -40,6 +40,14 @@
       <div class="price-range" id="mainPrice">260,000đ - 289,000đ</div>
       <p class="note">Phân loại: <span id="productType"></span></p>
 
+      <div class="gift-set-selection">
+        <label>Chọn loại sản phẩm:</label>
+        <div class="radio-group">
+          <label><input type="radio" name="productTypeOption" value="set" checked> Set quà (quần áo, lược, khăn choàng, thiệp...)</label>
+          <label><input type="radio" name="productTypeOption" value="only-clothes"> Chỉ quần áo</label>
+        </div>
+      </div>
+
       <div class="size-section">
         <label>Size:</label>
         <div class="size-options" id="sizeOptions"></div>
@@ -55,7 +63,7 @@
       <p class="freeship">Freeship khu vực Hòa Lạc, nội thành Hà Nội</p>
 
       <div class="buttons">
-        <button class="add-to-cart">🛒 THÊM VÀO GIỎ</button>
+        <button id="addToCartBtn" class="add-to-cart">🛒 THÊM VÀO GIỎ</button>
         <button class="buy-now">MUA NGAY</button>
       </div>
     </div>
@@ -137,5 +145,84 @@
       span.textContent = qty;
     }
   </script>
+
+
+    <!-- xử lý button chọn loại sản phẩm -->
+    <script>
+    const productTypeRadios = document.getElementsByName("productTypeOption");
+
+    productTypeRadios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        const selected = document.querySelector('input[name="productTypeOption"]:checked').value;
+        if (selected === "only-clothes") {
+          document.getElementById("mainPrice").textContent = "260,000đ"; // ví dụ
+        } else {
+          document.getElementById("mainPrice").textContent = "289,000đ";
+        }
+      });
+    });
+  </script>
+
+  <!-- xử lý giỏ hàng -->
+      <script>
+        document.getElementById("addToCartBtn").addEventListener("click", () => {
+        const title = document.getElementById("productTitle").textContent;
+        const priceText = document.getElementById("mainPrice").textContent;
+        const price = parseInt(priceText.replace(/\D/g, ''));
+        const quantity = parseInt(document.getElementById("quantity").textContent);
+        const selectedSizeBtn = document.querySelector("#sizeOptions button.selected");
+
+        if (!selectedSizeBtn) {
+          alert("Vui lòng chọn size trước khi thêm vào giỏ hàng!");
+          return;
+        }
+
+        const size = selectedSizeBtn.textContent;
+        const image = document.getElementById("mainImage").src;
+        const productOption = document.querySelector('input[name="productTypeOption"]:checked')?.value || "set";
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existingItem = cart.find(item => item.title === title && item.size === size && item.productOption === productOption);
+
+        if (existingItem) {
+          existingItem.quantity += quantity;
+          existingItem.total = existingItem.quantity * existingItem.price;
+        } else {
+          const cartItem = {
+            title,
+            price,
+            quantity,
+            size,
+            image,
+            total: price * quantity,
+            productOption,
+            customer: {
+              name: "",
+              phone: "",
+              address: "",
+              zaloOrEmail: "",
+              fbLink: "",
+              payment: ""
+            }
+          };
+          cart.push(cartItem);
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Đã thêm vào giỏ hàng!");
+      });
+
+    </script>
+
+      <script>
+        document.getElementById("sizeOptions").addEventListener("click", (e) => {
+        if (e.target.tagName === "BUTTON" && !e.target.disabled) {
+          document.querySelectorAll("#sizeOptions button").forEach(btn => btn.classList.remove("selected"));
+          e.target.classList.add("selected");
+        }
+      });
+
+      </script>
+
 </body>
 </html>
