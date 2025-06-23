@@ -239,10 +239,8 @@ function submitOrder() {
   }
 
   const orderId = "DH" + Date.now();
-
-  // Tạo danh sách item sạch sẽ, chỉ chứa thông tin cần thiết và thêm title
   const cleanItems = cart.map(i => ({
-    title: i.title, // đảm bảo có tiêu đề
+    title: i.title,
     image: i.image,
     size: i.size,
     productOption: i.productOption,
@@ -253,7 +251,7 @@ function submitOrder() {
 
   const order = {
     id: orderId,
-    items: cleanItems, // dùng danh sách đã xử lý
+    items: cleanItems,
     customer: { name, address, phone, contact, fb, payment },
     total: subtotal,
     status: "pending",
@@ -261,19 +259,22 @@ function submitOrder() {
   };
 
   db.ref("orders/" + orderId).set(order).then(() => {
-    if (contact.includes("@")) {
-      const orderSummary = cleanItems.map(i => `${i.title} x${i.quantity}`).join("\n");
-      emailjs.send("service_52eakpm", "template_oh3lizs", {
-        to_name: name,
-        email: contact,
-        order_details: orderSummary,
-        total: subtotal.toLocaleString() + 'đ'
-      });
-    }
-
     if (payment === "bank") {
-      showQrModal(orderId, subtotal);
+      showQrModal(orderId, subtotal, contact, name, cleanItems);
     } else {
+      if (contact.includes("@")) {
+        const orderSummary = cleanItems.map(i => `${i.title} x${i.quantity}`).join("\n");
+        emailjs.send("service_52eakpm", "template_oh3lizs", {
+          to_name: name,
+          email: contact,
+          order_details: orderSummary,
+          total: subtotal.toLocaleString() + 'đ'
+        }).then(() => {
+          console.log("📧 Mail sent (COD)");
+        }).catch((err) => {
+          console.error("❌ Mail failed (COD):", err);
+        });
+      }
       localStorage.removeItem("cart");
       document.getElementById("successModal").style.display = "flex";
     }
@@ -285,17 +286,22 @@ renderCart();
 <script>
 let countdownInterval;
 
-function showQrModal(orderId, amount) {
+function showQrModal(orderId, amount, contact, name, items) {
   const qrUrl = `https://qr.sepay.vn/img?acc=1699918082003&bank=MBBank&amount=${amount}&des=Thanh toan don hang ${orderId}`;
   document.getElementById("qrImage").src = qrUrl;
   document.getElementById("qrNote").innerText = `Nội dung: Thanh toan don hang ${orderId}`;
   document.getElementById("qrModal").style.display = "flex";
+
   localStorage.setItem("pendingOrderId", orderId);
+  localStorage.setItem("pendingEmail", contact);
+  localStorage.setItem("pendingName", name);
+  localStorage.setItem("pendingItems", JSON.stringify(items));
+
   startCountdown(orderId);
 }
 
 function startCountdown(orderId) {
-  let seconds = 900; // 15 phút
+  let seconds = 900;
   const countdown = document.createElement("p");
   countdown.id = "countdown";
   document.getElementById("qrModal").querySelector(".btn").before(countdown);
@@ -315,13 +321,37 @@ function startCountdown(orderId) {
 
 async function checkPaymentStatus() {
   const orderId = localStorage.getItem("pendingOrderId");
+  const contact = localStorage.getItem("pendingEmail");
+  const name = localStorage.getItem("pendingName");
+  const items = JSON.parse(localStorage.getItem("pendingItems") || "[]");
+
   const res = await fetch("https://sepay-proxy.onrender.com/transactions");
   const data = await res.json();
   const match = data.transactions.find(t => t.transaction_content.includes(orderId));
+
   if (match) {
     db.ref("orders/" + orderId).update({ status: "paid" });
+
+    if (contact.includes("@")) {
+      const orderSummary = items.map(i => `${i.title} x${i.quantity}`).join("\n");
+      emailjs.send("service_52eakpm", "template_oh3lizs", {
+        to_name: name,
+        email: contact,
+        order_details: orderSummary,
+        total: subtotal.toLocaleString() + 'đ'
+      }).then(() => {
+        console.log("📧 Mail sent (BANK)");
+      }).catch((err) => {
+        console.error("❌ Mail failed (BANK):", err);
+      });
+    }
+
     alert("✅ Đã xác nhận thanh toán!");
     localStorage.removeItem("cart");
+    localStorage.removeItem("pendingOrderId");
+    localStorage.removeItem("pendingEmail");
+    localStorage.removeItem("pendingName");
+    localStorage.removeItem("pendingItems");
     document.getElementById("qrModal").style.display = "none";
     document.getElementById("successModal").style.display = "flex";
   } else {
@@ -336,8 +366,12 @@ function cancelOrder() {
     alert("Đã hủy giao dịch.");
     document.getElementById("qrModal").style.display = "none";
     localStorage.removeItem("pendingOrderId");
+    localStorage.removeItem("pendingEmail");
+    localStorage.removeItem("pendingName");
+    localStorage.removeItem("pendingItems");
   });
 }
 </script>
+
 </body>
 </html>
