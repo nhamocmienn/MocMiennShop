@@ -1,78 +1,49 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Giỏ hàng</title>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       font-family: 'Be Vietnam Pro', sans-serif;
-      margin: 0;
-      padding: 20px;
+      margin: 0; padding: 20px;
       background-color: #f9f9f9;
       color: #333;
     }
-
-    h2 {
-      margin-bottom: 20px;
-    }
-
+    h2 { margin-bottom: 20px; }
     .container {
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
     }
-
     .cart-left, .cart-right {
       flex: 1;
       min-width: 320px;
       background-color: #fff;
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
-
     .cart-item {
-      display: flex;
-      gap: 15px;
-      align-items: flex-start;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #eee;
+      display: flex; gap: 15px; align-items: flex-start;
+      margin-bottom: 20px; border-bottom: 1px solid #eee;
       padding-bottom: 15px;
     }
-
     .cart-item img {
-      width: 90px;
-      height: 90px;
+      width: 90px; height: 90px;
       border-radius: 8px;
       object-fit: cover;
       border: 1px solid #ddd;
     }
-
-    .cart-item .info {
-      flex: 1;
-    }
-
-    .cart-item .info p {
-      margin: 5px 0;
-    }
-
-    .price {
-      color: #e74c3c;
-      font-weight: 600;
-    }
-
+    .info { flex: 1; }
+    .info p { margin: 5px 0; }
+    .price { color: #e74c3c; font-weight: 600; }
     .quantity-control {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
+      display: flex; align-items: center;
+      gap: 8px; margin-top: 8px;
     }
-
     .quantity-control button {
       padding: 4px 10px;
       border: none;
@@ -80,46 +51,33 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     .quantity-control button:hover {
       background-color: #ccc;
     }
-
     .section-title {
-      font-weight: 600;
-      margin-top: 10px;
+      font-weight: 600; margin-top: 10px;
       font-size: 18px;
     }
-
     input, select {
-      width: 100%;
-      padding: 10px;
+      width: 100%; padding: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
       margin-bottom: 15px;
       font-size: 14px;
     }
-
     .summary {
       border: 1px solid #e74c3c;
       padding: 20px;
       border-radius: 10px;
       background-color: #fffaf9;
     }
-
-    .summary h3 {
-      margin-top: 0;
-      font-size: 18px;
-      margin-bottom: 15px;
-    }
-
+    .summary h3 { margin-top: 0; font-size: 18px; margin-bottom: 15px; }
     .summary p {
       display: flex;
       justify-content: space-between;
       margin: 6px 0;
       font-size: 14px;
     }
-
     .btn {
       padding: 12px 20px;
       background-color: #e74c3c;
@@ -130,25 +88,17 @@
       font-weight: 500;
       margin-top: 20px;
     }
-
-    .btn:hover {
-      background-color: #c0392b;
-    }
-
+    .btn:hover { background-color: #c0392b; }
     .text-note {
       font-size: 12px;
       color: #555;
       margin-top: 10px;
     }
-
-    .cart-empty {
-      font-style: italic;
-      color: #888;
-    }
+    .cart-empty { font-style: italic; color: #888; }
+    #countdown { font-size: 14px; margin-top: 10px; color: #e74c3c; }
   </style>
 </head>
 <body>
-
 <div class="container">
   <div class="cart-left">
     <h2>🛒 Giỏ hàng của bạn</h2>
@@ -161,8 +111,8 @@
     <input placeholder="Họ và tên" id="customerName">
     <input placeholder="Địa chỉ giao hàng" id="customerAddress">
     <input placeholder="Số điện thoại" id="customerPhone">
-    <input placeholder="Zalo hoặc email" id="customerContact">
-    <input placeholder="Link Facebook hỗ trợ bảo hành" id="customerFB">
+    <input placeholder="Email" id="customerContact">
+    <input placeholder="Link Facebook hỗ trợ bảo hành(Tùy chọn)" id="customerFB">
     <select id="paymentMethod">
       <option value="">Phương thức thanh toán</option>
       <option value="cod">Thanh toán khi nhận hàng (COD)</option>
@@ -175,152 +125,219 @@
       <p><strong>Tổng phụ:</strong> <span id="subtotal">0đ</span></p>
       <p><strong>Tổng cộng:</strong> <span id="total">0đ</span></p>
       <label><input type="radio" checked> Chuyển khoản ngân hàng</label>
-      <p class="text-note">Vui lòng sử dụng Mã đơn hàng của bạn trong nội dung chuyển khoản. Đơn hàng sẽ được xử lý sau khi thanh toán thành công.</p>
+      <p class="text-note">Vui lòng sử dụng Mã đơn hàng của bạn trong nội dung chuyển khoản.</p>
     </div>
 
     <button class="btn" onclick="submitOrder()">✅ Xác nhận đặt hàng</button>
   </div>
 </div>
 
+<!-- Modal Thành công -->
+<div id="successModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); z-index:999; justify-content:center; align-items:center;">
+  <div style="background:white; padding:30px; border-radius:10px; text-align:center; max-width: 400px;">
+    <h2>🎉 Đặt hàng thành công!</h2>
+    <p>Thông tin đơn hàng đã được lưu và xác nhận qua email</p>
+    <button onclick="closeModal()" class="btn">Đóng</button>
+  </div>
+</div>
+
+<!-- Modal QR Code -->
+<div id="qrModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); z-index:999; justify-content:center; align-items:center;">
+  <div style="background:white; padding:30px; border-radius:10px; text-align:center; max-width: 400px;">
+    <h3>Chuyển khoản ngân hàng</h3>
+    <p>Vui lòng quét mã QR để thanh toán:</p>
+    <img id="qrImage" src="" style="width: 280px; margin: 15px auto;" />
+    <p id="qrNote" style="font-size: 14px; color: #666;"></p>
+    <button onclick="checkPaymentStatus()" class="btn">✅ Tôi đã thanh toán</button>
+    <button onclick="cancelOrder()" class="btn" style="background-color:#aaa;">❌ Hủy giao dịch</button>
+  </div>
+</div>
+
+<!-- SDK Firebase + EmailJS -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const cartList = document.getElementById("cartList");
-  const summaryItems = document.getElementById("summaryItems");
-  let subtotal = 0;
-
-  if (cart.length === 0) {
-    cartList.innerHTML = "<p class='cart-empty'>Hiện không có sản phẩm nào trong giỏ hàng.</p>";
-  } else {
-    cartList.innerHTML = cart.map((item, index) => {
-      subtotal += item.total;
-      return `
-        <div class="cart-item">
-          <img src="${item.image}" alt="${item.title}">
-          <div class="info">
-            <p><strong>${item.title}</strong></p>
-            <p>Loại: ${item.productOption === 'only-clothes' ? 'Chỉ quần áo' : 'Set quà'}</p>
-            <p>Size: ${item.size}</p>
-            <p>Giá: <span class="price">${item.price.toLocaleString()}đ</span></p>
-            <div class="quantity-control">
-              <button onclick="updateQty(${index}, -1)">-</button>
-              <span>${item.quantity}</span>
-              <button onclick="updateQty(${index}, 1)">+</button>
-              <button onclick="removeItem(${index})">🗑</button>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join("");
-
-    summaryItems.innerHTML = cart.map(item =>
-      `<p>${item.title} (${item.productOption === 'only-clothes' ? 'Chỉ quần áo' : 'Set quà'}) × ${item.quantity}<span>${item.total.toLocaleString()}đ</span></p>`
-    ).join("");
-
-    document.getElementById("subtotal").textContent = subtotal.toLocaleString() + 'đ';
-    document.getElementById("total").textContent = subtotal.toLocaleString() + 'đ';
-  }
-
-  function updateQty(index, delta) {
-    cart[index].quantity = Math.max(1, cart[index].quantity + delta);
-    cart[index].total = cart[index].quantity * cart[index].price;
-    localStorage.setItem("cart", JSON.stringify(cart));
-    location.reload();
-  }
-
-  function removeItem(index) {
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    location.reload();
-  }
-
-  function submitOrder() {
-    const name = document.getElementById("customerName").value.trim();
-    const address = document.getElementById("customerAddress").value.trim();
-    const phone = document.getElementById("customerPhone").value.trim();
-    const contact = document.getElementById("customerContact").value.trim();
-    const fb = document.getElementById("customerFB").value.trim();
-    const payment = document.getElementById("paymentMethod").value;
-
-    if (!name || !address || !phone || !payment) {
-      alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
-      return;
-    }
-
-    const order = {
-      items: cart,
-      customer: { name, address, phone, contact, fb, payment },
-      total: subtotal
-    };
-
-    console.log("Đơn hàng gửi:", order);
-
-    alert("Cảm ơn bạn đã đặt hàng! Thông tin đơn hàng đã được lưu.");
-    localStorage.removeItem("cart");
-    location.reload();
-  }
+  const firebaseConfig = {
+    apiKey: "AIzaSyCR6ChodbxTFeMqVEfc37LGMZn0sRKyl-k",
+    authDomain: "loichucyeuthuong18.firebaseapp.com",
+    databaseURL: "https://loichucyeuthuong18-default-rtdb.firebaseio.com",
+    projectId: "loichucyeuthuong18",
+    storageBucket: "loichucyeuthuong18.appspot.com",
+    messagingSenderId: "434140825017",
+    appId: "1:434140825017:web:13deda5e05e22fe2f76268"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  emailjs.init("X7ph5GIROzXgLEPCN");
 </script>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+let subtotal = cart.reduce((sum, i) => sum + i.total, 0);
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCR6ChodbxTFeMqVEfc37LGMZn0sRKyl-k",
-      authDomain: "loichucyeuthuong18.firebaseapp.com",
-      databaseURL: "https://loichucyeuthuong18-default-rtdb.firebaseio.com", // <--- đúng
-      projectId: "loichucyeuthuong18",
-      storageBucket: "loichucyeuthuong18.appspot.com",
-      messagingSenderId: "434140825017",
-      appId: "1:434140825017:web:13deda5e05e22fe2f76268"
-    };
+function renderCart() {
+  const cartList = document.getElementById("cartList");
+  const summaryItems = document.getElementById("summaryItems");
+  if (cart.length === 0) {
+    cartList.innerHTML = "<p class='cart-empty'>Hiện không có sản phẩm nào trong giỏ hàng.</p>";
+    return;
+  }
+  cartList.innerHTML = cart.map((item, index) => `
+    <div class="cart-item">
+      <img src="${item.image}" alt="${item.title}">
+      <div class="info">
+        <p><strong>${item.title}</strong></p>
+        <p>Loại: ${item.productOption === 'only-clothes' ? 'Chỉ quần áo' : 'Set quà'}</p>
+        <p>Size: ${item.size}</p>
+        <p>Giá: <span class="price">${item.price.toLocaleString()}đ</span></p>
+        <div class="quantity-control">
+          <button onclick="updateQty(${index}, -1)">-</button>
+          <span>${item.quantity}</span>
+          <button onclick="updateQty(${index}, 1)">+</button>
+          <button onclick="removeItem(${index})">🗑</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
 
+  summaryItems.innerHTML = cart.map(item =>
+    `<p>${item.title} × ${item.quantity}<span>${item.total.toLocaleString()}đ</span></p>`
+  ).join("");
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-  </script>
+  document.getElementById("subtotal").textContent = subtotal.toLocaleString() + 'đ';
+  document.getElementById("total").textContent = subtotal.toLocaleString() + 'đ';
+}
 
-  <script>
-    function submitOrder() {
-      const name = document.getElementById("customerName").value.trim();
-      const address = document.getElementById("customerAddress").value.trim();
-      const phone = document.getElementById("customerPhone").value.trim();
-      const contact = document.getElementById("customerContact").value.trim();
-      const fb = document.getElementById("customerFB").value.trim();
-      const payment = document.getElementById("paymentMethod").value;
+function updateQty(index, delta) {
+  cart[index].quantity = Math.max(1, cart[index].quantity + delta);
+  cart[index].total = cart[index].quantity * cart[index].price;
+  localStorage.setItem("cart", JSON.stringify(cart));
+  location.reload();
+}
+function removeItem(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  location.reload();
+}
+function closeModal() {
+  document.getElementById("successModal").style.display = "none";
+  location.reload();
+}
 
-      if (!name || !address || !phone || !payment) {
-        alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
-        return;
-      }
+function submitOrder() {
+  const name = document.getElementById("customerName").value.trim();
+  const address = document.getElementById("customerAddress").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const contact = document.getElementById("customerContact").value.trim();
+  const fb = document.getElementById("customerFB").value.trim();
+  const payment = document.getElementById("paymentMethod").value;
 
-      const timestamp = new Date().toISOString(); // thời gian ISO
+  if (!name || !address || !phone || !payment) {
+    alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
+    return;
+  }
 
-      const order = {
-        items: cart,
-        customer: { name, address, phone, contact, fb, payment },
-        total: subtotal,
-        status: "pending",
-        createdAt: timestamp
-      };
+  const orderId = "DH" + Date.now();
 
-      // Lưu vào Firebase
-      db.ref("orders").push(order)
-        .then(() => {
-          alert("Đơn hàng đã được gửi thành công!");
-          localStorage.removeItem("cart");
-          location.reload();
-        })
-        .catch(error => {
-          console.error("Lỗi khi lưu đơn hàng:", error);
-          alert("Có lỗi xảy ra. Vui lòng thử lại.");
-        });
+  // Tạo danh sách item sạch sẽ, chỉ chứa thông tin cần thiết và thêm title
+  const cleanItems = cart.map(i => ({
+    title: i.title, // đảm bảo có tiêu đề
+    image: i.image,
+    size: i.size,
+    productOption: i.productOption,
+    price: i.price,
+    quantity: i.quantity,
+    total: i.total
+  }));
+
+  const order = {
+    id: orderId,
+    items: cleanItems, // dùng danh sách đã xử lý
+    customer: { name, address, phone, contact, fb, payment },
+    total: subtotal,
+    status: "pending",
+    createdAt: new Date().toISOString()
+  };
+
+  db.ref("orders/" + orderId).set(order).then(() => {
+    if (contact.includes("@")) {
+      const orderSummary = cleanItems.map(i => `${i.title} x${i.quantity}`).join("\n");
+      emailjs.send("service_52eakpm", "template_oh3lizs", {
+        to_name: name,
+        email: contact,
+        order_details: orderSummary,
+        total: subtotal.toLocaleString() + 'đ'
+      });
     }
-    </script>
 
+    if (payment === "bank") {
+      showQrModal(orderId, subtotal);
+    } else {
+      localStorage.removeItem("cart");
+      document.getElementById("successModal").style.display = "flex";
+    }
+  });
+}
+renderCart();
+</script>
 
+<script>
+let countdownInterval;
 
+function showQrModal(orderId, amount) {
+  const qrUrl = `https://qr.sepay.vn/img?acc=1699918082003&bank=MBBank&amount=${amount}&des=Thanh toan don hang ${orderId}`;
+  document.getElementById("qrImage").src = qrUrl;
+  document.getElementById("qrNote").innerText = `Nội dung: Thanh toan don hang ${orderId}`;
+  document.getElementById("qrModal").style.display = "flex";
+  localStorage.setItem("pendingOrderId", orderId);
+  startCountdown(orderId);
+}
 
+function startCountdown(orderId) {
+  let seconds = 900; // 15 phút
+  const countdown = document.createElement("p");
+  countdown.id = "countdown";
+  document.getElementById("qrModal").querySelector(".btn").before(countdown);
 
+  countdownInterval = setInterval(() => {
+    if (seconds <= 0) {
+      clearInterval(countdownInterval);
+      cancelOrder();
+    } else {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      countdown.innerText = `⏳ Thời gian còn lại: ${m}:${s.toString().padStart(2, "0")}`;
+      seconds--;
+    }
+  }, 1000);
+}
+
+async function checkPaymentStatus() {
+  const orderId = localStorage.getItem("pendingOrderId");
+  const res = await fetch("https://sepay-proxy.onrender.com/transactions");
+  const data = await res.json();
+  const match = data.transactions.find(t => t.transaction_content.includes(orderId));
+  if (match) {
+    db.ref("orders/" + orderId).update({ status: "paid" });
+    alert("✅ Đã xác nhận thanh toán!");
+    localStorage.removeItem("cart");
+    document.getElementById("qrModal").style.display = "none";
+    document.getElementById("successModal").style.display = "flex";
+  } else {
+    alert("❌ Chưa thấy giao dịch phù hợp. Vui lòng thử lại.");
+  }
+}
+
+function cancelOrder() {
+  clearInterval(countdownInterval);
+  const orderId = localStorage.getItem("pendingOrderId");
+  db.ref("orders/" + orderId).remove().then(() => {
+    alert("Đã hủy giao dịch.");
+    document.getElementById("qrModal").style.display = "none";
+    localStorage.removeItem("pendingOrderId");
+  });
+}
+</script>
 </body>
 </html>

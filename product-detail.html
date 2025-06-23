@@ -38,12 +38,12 @@
     <div class="right-column">
       <h2 id="productTitle">Tên sản phẩm</h2>
       <div class="price-range" id="mainPrice">260,000đ - 289,000đ</div>
-      <p class="note">Phân loại: <span id="productType"></span></p>
+    
 
       <div class="gift-set-selection">
         <label>Chọn loại sản phẩm:</label>
         <div class="radio-group">
-          <label><input type="radio" name="productTypeOption" value="set" checked> Set quà (quần áo, lược, khăn choàng, thiệp...)</label>
+          <label><input type="radio" name="productTypeOption" value="set" checked> Set quà </label>
           <label><input type="radio" name="productTypeOption" value="only-clothes"> Chỉ quần áo</label>
         </div>
       </div>
@@ -55,7 +55,7 @@
 
       <div class="quantity-section">
         <label>Số lượng:</label>
-        <button onclick="adjustQuantity(-1)">-</button>
+        <button onclick="adjustQuantity(-1)" >-</button>
         <span id="quantity">1</span>
         <button onclick="adjustQuantity(1)">+</button>
       </div>
@@ -64,7 +64,7 @@
 
       <div class="buttons">
         <button id="addToCartBtn" class="add-to-cart">🛒 THÊM VÀO GIỎ</button>
-        <button class="buy-now">MUA NGAY</button>
+        <!-- <button class="buy-now">MUA NGAY</button> -->
       </div>
     </div>
   </div>
@@ -116,7 +116,7 @@
 
       document.getElementById("productTitle").textContent = product.name;
       document.getElementById("mainPrice").textContent = parseInt(product.price).toLocaleString() + 'đ';
-      document.getElementById("productType").textContent = product.type;
+   
       //document.getElementById("productDesc").textContent = product.detailDesc || product.desc || "Chưa có mô tả.";
 
       const images = product.images || [];
@@ -223,6 +223,15 @@
       });
 
       </script>
+
+      <script>
+    document.getElementById("sizeOptions").addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON" && !e.target.disabled) {
+        document.querySelectorAll("#sizeOptions button").forEach(btn => btn.classList.remove("selected"));
+        e.target.classList.add("selected");
+      }
+    });
+  </script>
 
 </body>
 </html>

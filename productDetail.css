@@ -97,9 +97,56 @@ body {
 }
 
 .size-section{
-    display: flex;
     margin-top:10px;
     margin-bottom: 20px;
+}
+
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.size-options button {
+  padding: 5px 9px;
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 2px solid #c60e45;
+  background-color: white;
+  color: #c60e45;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.size-options button:hover:not(.disabled):not(.selected) {
+  background-color: #ffeaf0;
+}
+
+.size-options button.selected {
+  background-color: #c60e45;
+  color: white;
+  box-shadow: 0 0 10px rgba(198, 14, 69, 0.3);
+}
+
+.nut{
+  padding: 5px 9px;
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 2px solid #c60e45;
+  background-color: white;
+  color: #c60e45;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.size-options button.disabled {
+  opacity: 0.5;
+  border-color: #ccc;
+  color: #aaa;
+  cursor: not-allowed;
 }
 
 
@@ -297,27 +344,70 @@ body {
     justify-content: center;
   }
 
-  .size-options button {
-    padding: 6px 14px;
-    font-size: 14px;
-  }
+ .size-options button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      background-color: #fff;
+      color: #333;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .size-options button:hover:not(.disabled) {
+      background-color: #eee;
+    }
+
+    .size-options button.selected {
+      background-color: #c60e45;
+      color: white;
+      border-color: #c60e45;
+      box-shadow: 0 0 8px rgba(198, 14, 69, 0.4);
+    }
+
+    .size-options button.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 
   .quantity-section {
     flex-direction: row;
   }
 
-  .quantity-section button {
-    width: 32px;
-    height: 32px;
-    font-size: 16px;
-  }
+ .quantity-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
 
-  #quantity {
-    font-size: 16px;
-    min-width: 32px;
-    display: inline-block;
-    text-align: center;
-  }
+.quantity-section button {
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #c60e45;
+  background-color: #fff;
+  border: 2px solid #c60e45;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.quantity-section button:hover {
+  background-color: #ffe9ef;
+}
+
+#quantity {
+  font-size: 18px;
+  min-width: 36px;
+  text-align: center;
+  display: inline-block;
+  color: #7a1f39;
+  font-weight: 500;
+}
 
   /* Buttons */
   .buttons {
