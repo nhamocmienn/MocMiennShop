@@ -72,23 +72,7 @@
   <div class="product-description">
   <h3>Mô tả sản phẩm</h3>
   <div class="desc-block">
-    <p>💖 Ai rồi cũng phải bị "say nắng" một lần trong đời. Nàng bỗng cười, tim ta khẽ lạc nhịp, Tương tư thì dần lớn, còn lời yêu ngại ngùng mãi chưa dám cất lên! Nhưng các cao thủ tình yêu đã dặn: “Hành động luôn lãng mạn hơn lời nói”.</p>
-
-    <p>Vậy nên Nhà Mộc Miên mách cho ae set quà tặng này tên là “Dịu” – tựa như lời thì thầm tinh tế nói thay tấm chân tình, giúp ae ghi điểm tuyệt đối trong mắt crush nhá.</p>
-
-    <p>💝 Set bao gồm:<br>
-    • 1 bộ lụa mềm mại, dịu dàng với cả làn da nhạy cảm, ai mặc cũng phải mê<br>
-    • 1 thiệp viết tay đong đầy cảm xúc<br>
-    • 1 lược gỗ trầm hương massage thư giãn giúp crush giải tỏa căng thẳng<br>
-    Tất cả được đóng gói tỉ mỉ trong hộp quà xinh yêu.</p>
-
-    <p>💌 Đừng để đối thủ nhanh chân tỏ tình trước – đặt hàng ngay kẻo ế dài dài là không có kêu nha!</p>
-
-    <hr>
-    <p><strong>Mọi thắc mắc xin liên hệ:</strong><br>
-    Facebook: Nhà Mộc Miên<br>
-    Instagram: @nhamocmien<br>
-    Hotline: 0345324233</p>
+    
   </div>
 </div>
 
@@ -96,123 +80,129 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCR6ChodbxTFeMqVEfc37LGMZn0sRKyl-k",
-      authDomain: "loichucyeuthuong18.firebaseapp.com",
-      projectId: "loichucyeuthuong18",
-      storageBucket: "loichucyeuthuong18.appspot.com",
-      messagingSenderId: "434140825017",
-      appId: "1:434140825017:web:13deda5e05e22fe2f76268"
-    };
-    firebase.initializeApp(firebaseConfig);
+  const firebaseConfig = {
+    apiKey: "AIzaSyCR6ChodbxTFeMqVEfc37LGMZn0sRKyl-k",
+    authDomain: "loichucyeuthuong18.firebaseapp.com",
+    projectId: "loichucyeuthuong18",
+    storageBucket: "loichucyeuthuong18.appspot.com",
+    messagingSenderId: "434140825017",
+    appId: "1:434140825017:web:13deda5e05e22fe2f76268"
+  };
+  firebase.initializeApp(firebaseConfig);
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id');
-    const db = firebase.database();
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get('id');
+  const db = firebase.database();
+  let productPrice = 0; // Lưu giá sản phẩm lấy từ Firebase
 
-    db.ref(`products/${productId}`).once("value").then(snapshot => {
-      const product = snapshot.val();
-      if (!product) return;
+  db.ref(`products/${productId}`).once("value").then(snapshot => {
+    const product = snapshot.val();
+    if (!product) return;
 
-      document.getElementById("productTitle").textContent = product.name;
-      document.getElementById("mainPrice").textContent = parseInt(product.price).toLocaleString() + 'đ';
-   
-      //document.getElementById("productDesc").textContent = product.detailDesc || product.desc || "Chưa có mô tả.";
+    document.getElementById("productTitle").textContent = product.name;
+    productPrice = parseInt(product.price) || 260000;
 
-      const images = product.images || [];
-      document.getElementById("mainImage").src = images[0] || 'https://via.placeholder.com/250x200?text=No+Image';
+    // Mặc định là set quà → giá 289000
+    document.getElementById("mainPrice").textContent = "289,000đ";
 
-      document.getElementById("subImages").innerHTML = images.map(img => `
-        <img src="${img}" onclick="document.getElementById('mainImage').src='${img}'">
-      `).join("");
+    const detailHTML = (product.detailDesc || "Chưa có mô tả.").replace(/\n/g, "<br>");
+    document.querySelector(".desc-block").innerHTML = detailHTML;
 
-      const sizeContainer = document.getElementById("sizeOptions");
-      const sizes = ["S", "M", "L", "XL"];
-      sizes.forEach(size => {
-        const qty = product.quantity?.[size] ?? 0;
-        const btn = document.createElement("button");
-        btn.textContent = size;
-        btn.disabled = qty <= 0;
-        if (qty <= 0) btn.classList.add("disabled");
-        sizeContainer.appendChild(btn);
-      });
+    const images = product.images || [];
+    document.getElementById("mainImage").src = images[0] || 'https://via.placeholder.com/250x200?text=No+Image';
+    document.getElementById("subImages").innerHTML = images.map(img => `
+      <img src="${img}" onclick="document.getElementById('mainImage').src='${img}'">
+    `).join("");
+
+    const sizeContainer = document.getElementById("sizeOptions");
+    const sizes = ["S", "M", "L", "XL"];
+    sizes.forEach(size => {
+      const qty = product.quantity?.[size] ?? 0;
+      const btn = document.createElement("button");
+      btn.textContent = size;
+      btn.disabled = qty <= 0;
+      if (qty <= 0) btn.classList.add("disabled");
+      sizeContainer.appendChild(btn);
     });
+  });
 
-    function adjustQuantity(delta) {
-      const span = document.getElementById("quantity");
-      let qty = parseInt(span.textContent);
-      qty = Math.max(1, qty + delta);
-      span.textContent = qty;
+  // Cập nhật giá khi chọn loại sản phẩm
+  const productTypeRadios = document.getElementsByName("productTypeOption");
+  productTypeRadios.forEach(radio => {
+    radio.addEventListener("change", () => {
+      const selected = document.querySelector('input[name="productTypeOption"]:checked').value;
+      if (selected === "only-clothes") {
+        document.getElementById("mainPrice").textContent = productPrice.toLocaleString() + "đ";
+      } else {
+        document.getElementById("mainPrice").textContent = "289,000đ";
+      }
+    });
+  });
+
+  function adjustQuantity(delta) {
+    const span = document.getElementById("quantity");
+    let qty = parseInt(span.textContent);
+    qty = Math.max(1, qty + delta);
+    span.textContent = qty;
+  }
+
+  // chọn size
+  document.getElementById("sizeOptions").addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON" && !e.target.disabled) {
+      document.querySelectorAll("#sizeOptions button").forEach(btn => btn.classList.remove("selected"));
+      e.target.classList.add("selected");
     }
-  </script>
+  });
 
+  // xử lý giỏ hàng
+  document.getElementById("addToCartBtn").addEventListener("click", () => {
+    const title = document.getElementById("productTitle").textContent;
+    const priceText = document.getElementById("mainPrice").textContent;
+    const price = parseInt(priceText.replace(/\D/g, ''));
+    const quantity = parseInt(document.getElementById("quantity").textContent);
+    const selectedSizeBtn = document.querySelector("#sizeOptions button.selected");
 
-    <!-- xử lý button chọn loại sản phẩm -->
-    <script>
-    const productTypeRadios = document.getElementsByName("productTypeOption");
+    if (!selectedSizeBtn) {
+      alert("Vui lòng chọn size trước khi thêm vào giỏ hàng!");
+      return;
+    }
 
-    productTypeRadios.forEach(radio => {
-      radio.addEventListener("change", () => {
-        const selected = document.querySelector('input[name="productTypeOption"]:checked').value;
-        if (selected === "only-clothes") {
-          document.getElementById("mainPrice").textContent = "260,000đ"; // ví dụ
-        } else {
-          document.getElementById("mainPrice").textContent = "289,000đ";
+    const size = selectedSizeBtn.textContent;
+    const image = document.getElementById("mainImage").src;
+    const productOption = document.querySelector('input[name="productTypeOption"]:checked')?.value || "set";
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingItem = cart.find(item => item.title === title && item.size === size && item.productOption === productOption);
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
+      existingItem.total = existingItem.quantity * existingItem.price;
+    } else {
+      const cartItem = {
+        title,
+        price,
+        quantity,
+        size,
+        image,
+        total: price * quantity,
+        productOption,
+        customer: {
+          name: "",
+          phone: "",
+          address: "",
+          zaloOrEmail: "",
+          fbLink: "",
+          payment: ""
         }
-      });
-    });
-  </script>
+      };
+      cart.push(cartItem);
+    }
 
-  <!-- xử lý giỏ hàng -->
-      <script>
-        document.getElementById("addToCartBtn").addEventListener("click", () => {
-        const title = document.getElementById("productTitle").textContent;
-        const priceText = document.getElementById("mainPrice").textContent;
-        const price = parseInt(priceText.replace(/\D/g, ''));
-        const quantity = parseInt(document.getElementById("quantity").textContent);
-        const selectedSizeBtn = document.querySelector("#sizeOptions button.selected");
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Đã thêm vào giỏ hàng!");
+  });
+ </script>
 
-        if (!selectedSizeBtn) {
-          alert("Vui lòng chọn size trước khi thêm vào giỏ hàng!");
-          return;
-        }
-
-        const size = selectedSizeBtn.textContent;
-        const image = document.getElementById("mainImage").src;
-        const productOption = document.querySelector('input[name="productTypeOption"]:checked')?.value || "set";
-
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const existingItem = cart.find(item => item.title === title && item.size === size && item.productOption === productOption);
-
-        if (existingItem) {
-          existingItem.quantity += quantity;
-          existingItem.total = existingItem.quantity * existingItem.price;
-        } else {
-          const cartItem = {
-            title,
-            price,
-            quantity,
-            size,
-            image,
-            total: price * quantity,
-            productOption,
-            customer: {
-              name: "",
-              phone: "",
-              address: "",
-              zaloOrEmail: "",
-              fbLink: "",
-              payment: ""
-            }
-          };
-          cart.push(cartItem);
-        }
-
-        localStorage.setItem("cart", JSON.stringify(cart));
-        alert("Đã thêm vào giỏ hàng!");
-      });
-
-    </script>
 
       <script>
         document.getElementById("sizeOptions").addEventListener("click", (e) => {
