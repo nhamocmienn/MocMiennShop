@@ -225,7 +225,16 @@ function closeModal() {
   location.reload();
 }
 
+let isSubmitting = false; // ✅ Cờ ngăn bấm liên tục
+
 function submitOrder() {
+  if (isSubmitting) return; // ⛔ Ngăn nhấn lại khi đang xử lý
+
+  isSubmitting = true;
+  const btn = document.querySelector(".cart-right .btn");
+  btn.disabled = true;
+  btn.innerText = "⏳ Đang xử lý...";
+
   const name = document.getElementById("customerName").value.trim();
   const address = document.getElementById("customerAddress").value.trim();
   const phone = document.getElementById("customerPhone").value.trim();
@@ -235,6 +244,9 @@ function submitOrder() {
 
   if (!name || !address || !phone || !payment) {
     alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
+    isSubmitting = false;
+    btn.disabled = false;
+    btn.innerText = "✅ Xác nhận đặt hàng";
     return;
   }
 
@@ -269,15 +281,19 @@ function submitOrder() {
           email: contact,
           order_details: orderSummary,
           total: subtotal.toLocaleString() + 'đ'
-        }).then(() => {
-          console.log("📧 Mail sent (COD)");
-        }).catch((err) => {
-          console.error("❌ Mail failed (COD):", err);
-        });
+        }).catch(err => console.error("❌ Mail failed (COD):", err));
       }
       localStorage.removeItem("cart");
       document.getElementById("successModal").style.display = "flex";
     }
+    isSubmitting = false;
+    btn.disabled = false;
+    btn.innerText = "✅ Xác nhận đặt hàng";
+  }).catch(error => {
+    alert("❌ Đặt hàng thất bại: " + error.message);
+    isSubmitting = false;
+    btn.disabled = false;
+    btn.innerText = "✅ Xác nhận đặt hàng";
   });
 }
 renderCart();
@@ -362,15 +378,27 @@ async function checkPaymentStatus() {
 function cancelOrder() {
   clearInterval(countdownInterval);
   const orderId = localStorage.getItem("pendingOrderId");
+
+  if (!orderId) {
+    alert("Không tìm thấy mã đơn hàng để hủy.");
+    return;
+  }
+
   db.ref("orders/" + orderId).remove().then(() => {
-    alert("Đã hủy giao dịch.");
+    alert("✅ Đã hủy đơn hàng.");
     document.getElementById("qrModal").style.display = "none";
+
+    // Xóa localStorage sau khi đảm bảo xóa firebase thành công
+    localStorage.removeItem("cart");
     localStorage.removeItem("pendingOrderId");
     localStorage.removeItem("pendingEmail");
     localStorage.removeItem("pendingName");
     localStorage.removeItem("pendingItems");
+  }).catch((error) => {
+    alert("❌ Không thể hủy đơn hàng. Lỗi: " + error.message);
   });
 }
+
 </script>
 
 </body>
