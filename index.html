@@ -99,6 +99,10 @@
         <label for="senderName">Người gửi:</label>
         <input type="text" id="senderName" placeholder="Tên bạn (hoặc để trống nếu ẩn danh)">
 
+        <label for="senderContact">Liên hệ người gửi (SĐT / Email / Facebook / Zalo):</label>
+        <input type="text" id="senderContact" placeholder="VD: so dien thoai / fb.com/banthan / email@gmail.com">
+
+
         <label><input type="checkbox" id="anonymous"> Gửi ẩn danh</label>
 
         <label for="receiverName">Người nhận:</label>
@@ -280,6 +284,7 @@
     errorMsg.textContent = "";
 
     const sender = document.getElementById("anonymous").checked ? "Ẩn danh" : document.getElementById("senderName").value.trim();
+    const senderContact = document.getElementById("senderContact").value.trim();
     const receiver = document.getElementById("receiverName").value.trim();
     const contact = document.getElementById("receiverContact").value.trim();
     const message = document.getElementById("messageText").value.trim();
@@ -321,6 +326,7 @@
       const newMsgRef = db.ref("messages").push();
       await newMsgRef.set({
         sender,
+        senderContact,
         receiver,
         contact,
         message,
